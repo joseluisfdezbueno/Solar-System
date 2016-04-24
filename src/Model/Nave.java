@@ -19,16 +19,17 @@ import javax.vecmath.Vector3d;
  * @author Rogelio García Peña
  * @author José Luis Fernandez Bueno
  */
-public class Nave{
+public class Nave extends BranchGroup{
     private ObjectFile archivo;
-    private BranchGroup bg;
+    //private BranchGroup bg;
     private Scene modelo;
-    private Traslacion tr;
+    //private Traslacion tr;
+    private Vista vista;
     
-    public Nave (){
-        bg = new BranchGroup();
-        bg.setCapability(Group.ALLOW_CHILDREN_EXTEND);
-        bg.setCapability(Group.ALLOW_CHILDREN_WRITE);
+    public Nave(){
+        //bg = new BranchGroup();
+        this.setCapability(Group.ALLOW_CHILDREN_EXTEND);
+        this.setCapability(Group.ALLOW_CHILDREN_WRITE);
         
         //tr = new Traslacion(new Vector3d (25.0f, 0.0f, 0.0f));
         
@@ -42,11 +43,18 @@ public class Nave{
         
         //tr.addChild(modelo.getSceneGroup());
         //bg.addChild (tr);
-        bg.addChild (modelo.getSceneGroup());
+        this.addChild (modelo.getSceneGroup());
     }
     
+    /*
     public BranchGroup getBg() {
         return this.bg;
     }
+    */
+    
+    public void añadirVista(Vista vista){
+        this.vista = vista;
+        this.addChild(vista);
+    }    
     
 }

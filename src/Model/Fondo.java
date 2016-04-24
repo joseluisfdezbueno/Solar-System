@@ -21,31 +21,31 @@ import javax.vecmath.Point3d;
  * @author José Luis Fernandez Bueno
  */
 public class Fondo extends BranchGroup{
-    private final Background bg;
-    private  Appearance app;
+    private final Background fondo;
+    private final Appearance app;
     private final Texture texture;
     private final Primitive sphere;
-    private final BranchGroup bgGeometry;
+    private final BranchGroup entorno;
     
     public Fondo(){                
         
         // Se carga la textura y se introduce en la aparencia
         this.app = new Appearance ();
-        this.texture = new TextureLoader ("imgs/fondo.jpg", null).getTexture();
+        this.texture = new TextureLoader ("imgs/fondo1.jpg", null).getTexture();
         this.app.setTexture (this.texture);
         
-        this.sphere = new Sphere (40.0f, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS_INWARD, this.app);
+        // se crea la geometría donde pegaremos el fondo ya con sus textura
+        this.sphere = new Sphere (1.0f, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS_INWARD, this.app);
 
-        this.bg = new Background();
-        this.bg.setApplicationBounds (new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 10000.0));
+        // introducimos la esfera en la rama entorno
+        this.entorno = new BranchGroup();
+        this.entorno.addChild (this.sphere);
         
-        this.bgGeometry = new BranchGroup ();
-        this.bgGeometry.addChild (this.sphere);
-        this.bg.setGeometry (this.bgGeometry);
+        // creamos el fondo pasándole su entorno y generamos su campo de aplicación
+        this.fondo = new Background(this.entorno);
+        this.fondo.setApplicationBounds (new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 1000000.0));
         
-        
-        this.addChild (this.bg);
-                
-                
+        // introducimos el fondo en el grupo
+        this.addChild(this.fondo);
     }
 }

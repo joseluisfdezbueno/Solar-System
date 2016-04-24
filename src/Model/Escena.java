@@ -10,6 +10,7 @@ import com.sun.j3d.utils.geometry.Primitive;
 import javax.media.j3d.Alpha;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
+import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Group;
 import javax.media.j3d.RotationInterpolator;
 import javax.media.j3d.Transform3D;
@@ -28,9 +29,11 @@ public class Escena extends BranchGroup{
     private BranchGroup escena; // La rama de donde cuelga toda la escena
     private Estrella sol;
     private Planeta planeta;
-    private Satelite satelite;    
+    private Satelite satelite;
+    private Vista vistaLuna;
     
-    Escena(){        
+    Escena(Vista vista){        
+        this.vistaLuna = vista;
         // Se crea la rama de la escena
         escena = crearEscena();
     }
@@ -62,6 +65,7 @@ public class Escena extends BranchGroup{
         //............ LUNA ............
         //  Satélite (nombre, radio, velTraslacion, velRotacion, rutaImagen, distanciaPlaneta)
         this.satelite = new Satelite("Luna", 0.3f, 2000, 1000, "imgs/luna.jpg",new Vector3d (2f, 0.0f, 0.0f));
+        this.satelite.añadirVista(vistaLuna);
         this.planeta.addSatelite(satelite);
         //------------ TIERRA -----------------       
         

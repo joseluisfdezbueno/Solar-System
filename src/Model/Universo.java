@@ -29,20 +29,50 @@ import javax.vecmath.Vector3d;
  * @author Rogelio García Peña
  * @author José Luis Fernandez Bueno
  */
-public class Universo {
+public class Universo extends BranchGroup{
     
-    private final Escena escena;
-    private final Fondo fondo;
-    private final BranchGroup root;
-    private final SimpleUniverse universe;    
-    private final Luz luz;
-    private final Nave nave;
+    private Escena escena;
+    private Fondo fondo;
+    private BranchGroup root;
+    private SimpleUniverse universe;    
+    private Luz luz;
+    private Nave nave;
     private Pick pick;
+    private Vista vistaPlanta, vistaLuna, vistaNave;
     
-    public Universo (Canvas3D canvas){
+    private View view;
+    private Canvas3D canvas;
+    
+    public Universo(Canvas3D canvasPlanta, Canvas3D canvasVariable){
+
+        this.canvas = canvasVariable;
+                
+        // ---------- VISTAS --------------
+        // bg donde enlazamos la vista en planta
+        BranchGroup bgPlanta = new BranchGroup();
         
-        escena = new Escena();               
+        // Creamos la vista en planta, la enlazamos a un BG y la habilitamos
+        vistaPlanta = new Vista(canvasPlanta);
+        //crearVPlanta(posicion, dondeMirar, vup, escala, planoDelantero, planoTrasero)
+        vistaPlanta.crearVPlanta(new Point3d(0,40,0), new Point3d(0,0,0), new Vector3d(0,0,-1), 0.01f, 0.1f, 20f);
+        bgPlanta.addChild(vistaPlanta);
+        vistaPlanta.habilitar();
+    //    this.universe.addBranchGraph(bgPlanta);
         
+        // creamos la lista subjetiva posicionada en la luna
+        vistaLuna = new Vista(canvasVariable);
+        //crearVPlanta(posicion, dondeMirar, vup, angulo, planoDelantero, planoTrasero)
+        vistaLuna.crearVPerspSujetiva(new Point3d(2,0,0), new Point3d(0,0,0), new Vector3d(0,1,0), 45f, 0.1f, 35f);
+        
+        // creamos la lista subjetiva posicionada al frente de la nave
+        vistaNave = new Vista(canvasVariable);
+        vistaNave.crearVPerspSujetiva(new Point3d(2,0,0), new Point3d(0,0,0), new Vector3d(0,1,0), 45f, 0.1f, 35f);
+        // ----------- FIN VISTAS  -------------
+        
+        // creamos la escena
+        escena = new Escena(vistaLuna);
+        
+        // bg de la clase universo
         this.root = new BranchGroup();
                 
         // Creamos y enlazamos el fondo
@@ -96,7 +126,8 @@ public class Universo {
     RotPosPathInterpolator rotPosPath = new RotPosPathInterpolator(alpha, tg, transformacion, alphas, quats, positions);
         
     rotPosPath.setSchedulingBounds(new BoundingSphere(new Point3d(), 10000.0));
-        tg.addChild(nave.getBg());
+        nave.añadirVista(vistaNave);
+        tg.addChild(nave);
         tg.addChild(rotPosPath);
         this.root.addChild(tg);
       //  this.root.addChild(nave.getBg());
@@ -106,11 +137,16 @@ public class Universo {
                 // Activamos la capacibilidad de ser seleccionado
         escena.getBg().setCapability(Node.ENABLE_PICK_REPORTING);
         escena.getBg().setPickable(true);
-        pick = new Pick(canvas, escena.getBg());
+        pick = new Pick(canvasVariable, escena.getBg());
         escena.getBg().addChild(pick);
         
+        // ########### VISTAS ##############
+        
         // Se crea el universo. La parte de la vista
-        this.universe = createUniverse (canvas);
+        this.universe = createUniverse (canvasVariable);
+        
+        this.universe.addBranchGraph(bgPlanta);        
+                        
         // Se optimiza la escena y se cuelga del universo
         this.root.compile();
         this.universe.addBranchGraph(this.root);
@@ -136,24 +172,39 @@ public class Universo {
 
         // Se establece el angulo de vision a 45 grados y el plano de recorte trasero
         Viewer viewer = new Viewer (canvas);
-        View view = viewer.getView();
+        view = viewer.getView();
         view.setFieldOfView(Math.toRadians(45));
         view.setBackClipDistance(50.0);
 
         // Se construye y devuelve el Universo con los parametros definidos
         return new SimpleUniverse (viewingPlatform, viewer);
     }
-
-    public void crearVistaPlanta(){
-        
+    
+    public void activarVistaPerspectiva(){
+       // if(view.getCanvas3D(0) == null){
+            vistaNave.deshabilitar();
+            vistaLuna.deshabilitar();
+            view.addCanvas3D(canvas);
+        //} 
     }
-
-    public void crearVistaPerspectiva(){
-        
+    
+    public void activarVistaLuna(){
+        //view.removeCanvas3D(canvas);
+        view.removeAllCanvas3Ds();        
+        vistaNave.deshabilitar();
+        vistaLuna.habilitar();
     }
+    
+    public void activarVistaNave(){
+        //view.removeCanvas3D(canvas);
+        view.removeAllCanvas3Ds();
+        vistaLuna.deshabilitar();
+        vistaNave.habilitar();        
+    }    
     
     // método para cerrar la aplicación
     public void closeApp(int code) {
         System.exit (code);
     }
+    
 }

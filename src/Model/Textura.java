@@ -28,26 +28,24 @@ public class Textura{
         this.ap.setTexture (textura);
         this.ap.setMaterial (new Material (
             new Color3f (1.0f, 1.0f, 1.0f),   // Color ambiental
-            new Color3f (0f, 0f, 0f),   // Color emisivo
+            new Color3f (0f, 0f, 0f),         // Color emisivo
             new Color3f (1.0f, 1.0f, 1.0f),   // Color difuso
             new Color3f (0.0f, 0.0f, 0.0f),   // Color especular
-            64.0f ));                            // Brillo
+            64.0f ));                         // Brillo
         this.ta = new TextureAttributes();
         this.ta.setTextureMode(TextureAttributes.MODULATE);
         this.ap.setTextureAttributes(ta);
     }
     
-    public Appearance getAppearance () {
+    public Appearance getAppearance(){
         return this.ap;
     }
     
-    public void modificarMaterial(Color3f ambiental, Color3f emisivo, Color3f difuso, Color3f especular, float brillo) {
+    public void modificarMaterial(Color3f ambiental, Color3f emisivo, Color3f difuso, Color3f especular, float brillo){
         this.ap.getMaterial().setAmbientColor(ambiental);
         this.ap.getMaterial().setEmissiveColor(emisivo);
         this.ap.getMaterial().setDiffuseColor(difuso);
         this.ap.getMaterial().setSpecularColor(especular);  
         this.ap.getMaterial().setShininess(brillo);          
-    }
-    
-    
+    }        
 }

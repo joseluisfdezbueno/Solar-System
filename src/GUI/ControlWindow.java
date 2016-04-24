@@ -14,29 +14,43 @@ import javax.swing.JFrame;
  * @author fvelasco
  */
 public class ControlWindow extends JFrame {
-  private final Universo universe;
+  private final Universo universo;
+  Visualization ventana1, ventana2;
 
-  public ControlWindow(Canvas3D canvas, Universo anUniverse) {
-    super();
-    universe = anUniverse;
+  public ControlWindow(Canvas3D canvas1, Canvas3D canvas2, Universo anUniverse) {
+        
+    super();    
+    universo = anUniverse;
     initComponents();
-    setLocation (920, 100);
-    addWindowListener(new WindowAdapter() {
+    setLocation (1020, 100);
+    addWindowListener(new WindowAdapter(){
       @Override
-      public void windowClosing(WindowEvent e) {
+      public void windowClosing(WindowEvent e){
         closeApp(0);
       }
     });
    
-    Container contentPane = this.getContentPane();
-    contentPane.setLayout(new BorderLayout());
-    contentPane.add(canvas, BorderLayout.CENTER);
-    pack();
+   // Container contentPane = this.getContentPane();
+    //contentPane.setLayout(new BorderLayout());
+    //contentPane.add(canvas, BorderLayout.CENTER);
+  
         
-    // Inicializamos la 2º ventana
-    Visualization visualization = new Visualization (this, false, canvas);
-    visualization.setVisible(true);
+ 
+    int posicion1[] = {5, 5};
+    int posicion2[] = {600, 5};  
+    
+   // Inicializamos la 1º ventana    
+    ventana1 = new Visualization (this, false, canvas1, posicion1);
+    ventana1.setVisible(true);
+    
+    // Inicilizamos la 2º ventana
+    ventana2 = new Visualization (this, false, canvas2, posicion2);
+    ventana2.setVisible(true);
+    
+    togglePerspectiva.setSelected(true);
 
+    pack();
+    
   }
 
   /**
@@ -50,25 +64,221 @@ public class ControlWindow extends JFrame {
 
         primitiveGroup = new javax.swing.ButtonGroup();
         appearanceGroup = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        buttonGroup4 = new javax.swing.ButtonGroup();
+        buttonGroup5 = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
+        toggleNave = new javax.swing.JToggleButton();
+        toggleLuna = new javax.swing.JToggleButton();
+        togglePerspectiva = new javax.swing.JToggleButton();
+        jPanel2 = new javax.swing.JPanel();
+        toggleVentana1 = new javax.swing.JToggleButton();
+        toggleVentana2 = new javax.swing.JToggleButton();
+        buttonSalir = new javax.swing.JButton();
+
+        jRadioButton1.setText("jRadioButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Control");
         setMinimumSize(new java.awt.Dimension(300, 345));
-        getContentPane().setLayout(new java.awt.GridLayout(5, 0));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Vistas"));
+        jPanel1.setToolTipText("");
+
+        toggleNave.setText("Nave");
+        toggleNave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toggleNaveActionPerformed(evt);
+            }
+        });
+
+        toggleLuna.setText("Luna");
+        toggleLuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toggleLunaActionPerformed(evt);
+            }
+        });
+
+        togglePerspectiva.setText("Perspectiva");
+        togglePerspectiva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                togglePerspectivaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(toggleNave)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(togglePerspectiva)
+                .addGap(29, 29, 29)
+                .addComponent(toggleLuna)
+                .addGap(39, 39, 39))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(toggleNave)
+                    .addComponent(toggleLuna)
+                    .addComponent(togglePerspectiva))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ventanas"));
+
+        toggleVentana1.setText("Ventana 1");
+        toggleVentana1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toggleVentana1ActionPerformed(evt);
+            }
+        });
+
+        toggleVentana2.setText("Ventana2");
+        toggleVentana2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toggleVentana2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(toggleVentana1)
+                .addGap(51, 51, 51)
+                .addComponent(toggleVentana2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(toggleVentana1)
+                    .addComponent(toggleVentana2))
+                .addGap(37, 37, 37))
+        );
+
+        buttonSalir.setText("Salir");
+        buttonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSalirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(127, 127, 127)
+                .addComponent(buttonSalir)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(buttonSalir)
+                .addGap(25, 25, 25))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-  public void showWindow () {
-    setVisible (true);
+    private void toggleVentana1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleVentana1ActionPerformed
+        // TODO add your handling code here:
+        if(toggleVentana1.isSelected())
+            ventana1.setVisible(true);
+        else
+            ventana1.setVisible(false);                    
+    }//GEN-LAST:event_toggleVentana1ActionPerformed
+
+    private void toggleVentana2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleVentana2ActionPerformed
+        // TODO add your handling code here:
+        if(toggleVentana2.isSelected())
+            ventana2.setVisible(true);
+        else
+            ventana2.setVisible(false);
+    }//GEN-LAST:event_toggleVentana2ActionPerformed
+
+    private void toggleNaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleNaveActionPerformed
+        // TODO add your handling code here:
+        
+        if(toggleLuna.isSelected())
+            toggleLuna.setSelected(false);
+        if(togglePerspectiva.isSelected())
+            togglePerspectiva.setSelected(false);        
+        
+        universo.activarVistaNave();
+    }//GEN-LAST:event_toggleNaveActionPerformed
+
+    private void toggleLunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleLunaActionPerformed
+        // TODO add your handling code here:
+        
+        if(toggleNave.isSelected())
+            toggleNave.setSelected(false);
+        if(togglePerspectiva.isSelected())
+            togglePerspectiva.setSelected(false);        
+        
+        universo.activarVistaLuna();
+    }//GEN-LAST:event_toggleLunaActionPerformed
+
+    private void togglePerspectivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_togglePerspectivaActionPerformed
+        // TODO add your handling code here:
+        
+        if(toggleNave.isSelected())
+            toggleNave.setSelected(false);
+        if(toggleLuna.isSelected())
+            toggleLuna.setSelected(false);
+        //if(togglePerspectiva.isSelected())
+        universo.activarVistaPerspectiva();
+    }//GEN-LAST:event_togglePerspectivaActionPerformed
+
+    private void buttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalirActionPerformed
+        // TODO add your handling code here:
+        closeApp(0);        
+    }//GEN-LAST:event_buttonSalirActionPerformed
+
+  public void showWindow(){
+    setVisible(true);
   }
 
-  void closeApp (int code) {
-    universe.closeApp(code);
+  void closeApp(int code){
+    universo.closeApp(code);
   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup appearanceGroup;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.ButtonGroup buttonGroup5;
+    private javax.swing.JButton buttonSalir;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.ButtonGroup primitiveGroup;
+    private javax.swing.JToggleButton toggleLuna;
+    private javax.swing.JToggleButton toggleNave;
+    private javax.swing.JToggleButton togglePerspectiva;
+    private javax.swing.JToggleButton toggleVentana1;
+    private javax.swing.JToggleButton toggleVentana2;
     // End of variables declaration//GEN-END:variables
 }

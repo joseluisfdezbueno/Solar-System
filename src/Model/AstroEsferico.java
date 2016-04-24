@@ -26,6 +26,7 @@ public class AstroEsferico{
     TransformGroup rot, rot2, raiz;
     Traslacion tr;
     Rotacion rotacionPropia, rotacionEstrella;
+    Vista vista;
 
     public AstroEsferico(String nombre, float radio, int velT, int velR, String nombreImagen, Vector3d vector) {
         //this.bg = new BranchGroup();
@@ -67,5 +68,10 @@ public class AstroEsferico{
     public TransformGroup getTg(){
         return raiz;
     }
-        
+    
+    public void añadirVista(Vista vista){
+        this.vista = vista;
+        tr.addChild(vista);
+    }
+                   
 }

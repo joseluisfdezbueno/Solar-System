@@ -22,13 +22,16 @@ public class Practica1 {
      */
     public static void main(String[] args) {
         // Se obtiene la configuración gráfica del sistema y se crea el Canvas3D que va a mostrar la imagen
-        Canvas3D canvas = new Canvas3D (SimpleUniverse.getPreferredConfiguration());
+        Canvas3D canvasPlanta = new Canvas3D (SimpleUniverse.getPreferredConfiguration());
+        Canvas3D canvasVariable = new Canvas3D (SimpleUniverse.getPreferredConfiguration());
         // Se le da el tamaño deseado al lienzo
-        canvas.setSize(1200, 700);
+        canvasPlanta.setSize(600, 400);
+        canvasVariable.setSize(600, 400);
         // Se crea el universo y la rama de la vista con ese canvas
-        Universo universo = new Universo(canvas);
+        Universo universo = new Universo(canvasPlanta, canvasVariable);
+        //Universo universo2 = new Universo(canvasVariable);
         // Se crea la GUI a partir del Canvas3D y del Universo
-        ControlWindow controlWindow = new ControlWindow (canvas, universo);
+        ControlWindow controlWindow = new ControlWindow (canvasPlanta, canvasVariable, universo);
         // Se muestra la ventana principal de la aplicación
         controlWindow.showWindow();
     }
