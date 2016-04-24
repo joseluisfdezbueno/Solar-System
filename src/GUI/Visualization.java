@@ -15,12 +15,12 @@ import javax.swing.JDialog;
 public class Visualization extends JDialog {
   private ControlWindow controlWindow;
 
-  public Visualization(ControlWindow parent, boolean modal, Canvas3D canvas, int[] posicion) { 
+  public Visualization(ControlWindow parent, boolean modal, Canvas3D canvas, int[] posicionXY){ 
     super (parent, modal);
     controlWindow = parent;
     
     initComponents();
-    setLocation (posicion[0],posicion[1]);
+    setLocation (posicionXY[0],posicionXY[1]);
     addWindowListener(new WindowAdapter() {
       @Override
       public void windowClosing(WindowEvent e) {

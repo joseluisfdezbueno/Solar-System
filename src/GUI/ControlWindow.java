@@ -20,9 +20,10 @@ public class ControlWindow extends JFrame {
   public ControlWindow(Canvas3D canvas1, Canvas3D canvas2, Universo anUniverse) {
         
     super();    
-    universo = anUniverse;
+    this.universo = anUniverse;
+    
     initComponents();
-    setLocation (1020, 100);
+    setLocation (1060, 3);
     addWindowListener(new WindowAdapter(){
       @Override
       public void windowClosing(WindowEvent e){
@@ -30,23 +31,21 @@ public class ControlWindow extends JFrame {
       }
     });
    
-   // Container contentPane = this.getContentPane();
-    //contentPane.setLayout(new BorderLayout());
-    //contentPane.add(canvas, BorderLayout.CENTER);
-  
-        
- 
-    int posicion1[] = {5, 5};
-    int posicion2[] = {600, 5};  
+    // Pociciones de las ventanas
+    int posicion1[] = {0, 3};
+    int posicion2[] = {535, 3};  
     
    // Inicializamos la 1º ventana    
     ventana1 = new Visualization (this, false, canvas1, posicion1);
     ventana1.setVisible(true);
+    toggleVentana1.setSelected(true);
     
     // Inicilizamos la 2º ventana
     ventana2 = new Visualization (this, false, canvas2, posicion2);
     ventana2.setVisible(true);
+    toggleVentana2.setSelected(true);    
     
+    // Dejamos habilitado el toggle correspondiente a la cámara en perspectiva
     togglePerspectiva.setSelected(true);
 
     pack();
@@ -114,12 +113,13 @@ public class ControlWindow extends JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(2, 2, 2)
                 .addComponent(toggleNave)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(togglePerspectiva)
-                .addGap(29, 29, 29)
-                .addComponent(toggleLuna)
-                .addGap(39, 39, 39))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(toggleLuna, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,20 +153,20 @@ public class ControlWindow extends JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap()
                 .addComponent(toggleVentana1)
-                .addGap(51, 51, 51)
+                .addGap(44, 44, 44)
                 .addComponent(toggleVentana2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(toggleVentana1)
                     .addComponent(toggleVentana2))
-                .addGap(37, 37, 37))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         buttonSalir.setText("Salir");
@@ -180,29 +180,29 @@ public class ControlWindow extends JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(127, 127, 127)
+                .addGap(81, 81, 81)
                 .addComponent(buttonSalir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(buttonSalir)
-                .addGap(25, 25, 25))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void toggleVentana1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleVentana1ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:        
         if(toggleVentana1.isSelected())
             ventana1.setVisible(true);
         else
@@ -219,35 +219,45 @@ public class ControlWindow extends JFrame {
 
     private void toggleNaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleNaveActionPerformed
         // TODO add your handling code here:
+        if(toggleNave.isSelected()){
+            if(toggleLuna.isSelected())
+                toggleLuna.setSelected(false);
+            if(togglePerspectiva.isSelected())
+                togglePerspectiva.setSelected(false);
+            
+            universo.activarVistaNave();
+        }else{
+            toggleNave.setSelected(true);
+        }
         
-        if(toggleLuna.isSelected())
-            toggleLuna.setSelected(false);
-        if(togglePerspectiva.isSelected())
-            togglePerspectiva.setSelected(false);        
-        
-        universo.activarVistaNave();
     }//GEN-LAST:event_toggleNaveActionPerformed
 
     private void toggleLunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleLunaActionPerformed
         // TODO add your handling code here:
-        
-        if(toggleNave.isSelected())
-            toggleNave.setSelected(false);
-        if(togglePerspectiva.isSelected())
-            togglePerspectiva.setSelected(false);        
-        
-        universo.activarVistaLuna();
+        if(toggleLuna.isSelected()){
+            if(toggleNave.isSelected())
+                toggleNave.setSelected(false);
+            if(togglePerspectiva.isSelected())
+                togglePerspectiva.setSelected(false);        
+
+            universo.activarVistaLuna();
+        }else{
+            toggleLuna.setSelected(true);            
+        }
     }//GEN-LAST:event_toggleLunaActionPerformed
 
     private void togglePerspectivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_togglePerspectivaActionPerformed
         // TODO add your handling code here:
-        
-        if(toggleNave.isSelected())
-            toggleNave.setSelected(false);
-        if(toggleLuna.isSelected())
-            toggleLuna.setSelected(false);
-        //if(togglePerspectiva.isSelected())
-        universo.activarVistaPerspectiva();
+        if(togglePerspectiva.isSelected()){        
+            if(toggleNave.isSelected())
+                toggleNave.setSelected(false);
+            if(toggleLuna.isSelected())
+                toggleLuna.setSelected(false);
+
+            universo.activarVistaPerspectiva();
+        }else{
+            togglePerspectiva.setSelected(true);            
+        }            
     }//GEN-LAST:event_togglePerspectivaActionPerformed
 
     private void buttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalirActionPerformed

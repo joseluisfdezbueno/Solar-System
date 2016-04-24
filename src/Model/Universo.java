@@ -49,107 +49,64 @@ public class Universo extends BranchGroup{
                 
         // ---------- VISTAS --------------
         // bg donde enlazamos la vista en planta
-        BranchGroup bgPlanta = new BranchGroup();
+        //BranchGroup bgPlanta = new BranchGroup();
         
         // Creamos la vista en planta, la enlazamos a un BG y la habilitamos
         vistaPlanta = new Vista(canvasPlanta);
         //crearVPlanta(posicion, dondeMirar, vup, escala, planoDelantero, planoTrasero)
         vistaPlanta.crearVPlanta(new Point3d(0,40,0), new Point3d(0,0,0), new Vector3d(0,0,-1), 0.01f, 0.1f, 20f);
-        bgPlanta.addChild(vistaPlanta);
+        this.addChild(vistaPlanta);
         vistaPlanta.habilitar();
     //    this.universe.addBranchGraph(bgPlanta);
         
         // creamos la lista subjetiva posicionada en la luna
         vistaLuna = new Vista(canvasVariable);
         //crearVPlanta(posicion, dondeMirar, vup, angulo, planoDelantero, planoTrasero)
-        vistaLuna.crearVPerspSujetiva(new Point3d(2,0,0), new Point3d(0,0,0), new Vector3d(0,1,0), 45f, 0.1f, 35f);
+        vistaLuna.crearVPerspSujetiva(new Point3d(0.7f,0.5f,0f), new Point3d(-2,0,0), new Vector3d(0,1,0), 65f, 0.1f, 35f);
         
         // creamos la lista subjetiva posicionada al frente de la nave
         vistaNave = new Vista(canvasVariable);
-        vistaNave.crearVPerspSujetiva(new Point3d(2,0,0), new Point3d(0,0,0), new Vector3d(0,1,0), 45f, 0.1f, 35f);
+        vistaNave.crearVPerspSujetiva(new Point3d(0,1,-1.5), new Point3d(0,0,1), new Vector3d(0,1,0), 45f, 0.1f, 35f);
         // ----------- FIN VISTAS  -------------
         
         // creamos la escena
         escena = new Escena(vistaLuna);
         
         // bg de la clase universo
-        this.root = new BranchGroup();
+       // this.root = new BranchGroup();
                 
         // Creamos y enlazamos el fondo
         this.fondo = new Fondo();
-        this.root.addChild(fondo);
+        this.addChild(fondo);
         
         // Creamos y enlazamos la luz
         this.luz = new Luz();
-        this.root.addChild(luz.crearLuzAmbiental(new Color3f (0.2f, 0.2f, 0.2f)));
+        this.addChild(luz.crearLuzAmbiental(new Color3f (0.2f, 0.2f, 0.2f)));
         
         // Enlazamos la escena
-        this.root.addChild(this.escena.getBg());
+        this.addChild(this.escena);
 
         
-//############## NAVE //############################################
-        nave = new Nave();
-         
-        // Selección del camino a seguir por la nave, y su orientación
-        //RotPosPathInterpolator(alpha, ramaAAplicar, transformacion, rotaciones, posiciones);                
-    Alpha alpha = new Alpha( -1, Alpha.INCREASING_ENABLE, 0,0,20000,0,0,0,0,0 );
-    TransformGroup tg = new TransformGroup();                
-    Transform3D transformacion = new Transform3D();
-    float[] alphas = {0.0f, 0.20f, 0.30f, 0.40f, 0.55f, 0.70f, 0.80f, 0.90f, 1.0f};
-    Quat4f[] quats = new Quat4f[9];
-    Point3f[] positions = new Point3f[9];
-
-    tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-
-    quats[0] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI));
-    quats[1] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI)*1.5f);
-    quats[2] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI)*0);
-    quats[3] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI)*0);
-    quats[4] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI)*0);
-    quats[5] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI)*0);
-    quats[6] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI)/2);
-    quats[7] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI)/2);
-  //  quats[8] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI)*0);
-    quats[8] = quats[0];
-    
-    positions[0]= new Point3f(25.0f,  0.0f, 0.0f);
-    positions[1]= new Point3f(25.0f, 0.0f, 25.0f);
-    positions[2]= new Point3f(0.0f,  0.0f, 25.0f);
-    positions[3]= new Point3f(-25.0f,  0.0f, 25.0f);
-    positions[4]= new Point3f(-25.0f,  0.0f, 0.0f);
-    positions[5]= new Point3f(-25.0f,  0.0f, -25.0f);
-    positions[6]= new Point3f(0.0f, 0.0f, -25.0f);
-    positions[7]= new Point3f(25.0f,  0.0f, -25.0f);
-    //positions[8]= new Point3f(8.0f,  0.0f, 8.0f);
-    positions[8]= positions[0];
-
-    RotPosPathInterpolator rotPosPath = new RotPosPathInterpolator(alpha, tg, transformacion, alphas, quats, positions);
-        
-    rotPosPath.setSchedulingBounds(new BoundingSphere(new Point3d(), 10000.0));
+//############## NAVE //##################################
+        nave = new Nave();         
         nave.añadirVista(vistaNave);
-        tg.addChild(nave);
-        tg.addChild(rotPosPath);
-        this.root.addChild(tg);
+        this.addChild(nave.inicializarRuta());
       //  this.root.addChild(nave.getBg());
-//------------ NAVE ------------------------------------------------------
+//------------ FIN NAVE -----------------------------------
     
-        // pick
-                // Activamos la capacibilidad de ser seleccionado
-        escena.getBg().setCapability(Node.ENABLE_PICK_REPORTING);
-        escena.getBg().setPickable(true);
-        pick = new Pick(canvasVariable, escena.getBg());
-        escena.getBg().addChild(pick);
-        
-        // ########### VISTAS ##############
-        
-        // Se crea el universo. La parte de la vista
+        // PICK
+                // Activamos la capacidad de ser seleccionado
+        this.escena.setCapability(Node.ENABLE_PICK_REPORTING);
+        this.escena.setPickable(true);
+        pick = new Pick(canvasVariable, escena);
+        this.escena.addChild(pick);
+                    
+        // Se crea un SimpleUniverse con la vista en perspectiva por defecto
         this.universe = createUniverse (canvasVariable);
-        
-        this.universe.addBranchGraph(bgPlanta);        
-                        
+                                       
         // Se optimiza la escena y se cuelga del universo
-        this.root.compile();
-        this.universe.addBranchGraph(this.root);
+        this.compile();
+        this.universe.addBranchGraph(this);
     }
     
     // creación del universo
@@ -170,41 +127,45 @@ public class Universo extends BranchGroup{
         orbit.setZoomFactor (2.0f);
         viewingPlatform.setViewPlatformBehavior(orbit);
 
-        // Se establece el angulo de vision a 45 grados y el plano de recorte trasero
+        // Configuramos el view
         Viewer viewer = new Viewer (canvas);
-        view = viewer.getView();
-        view.setFieldOfView(Math.toRadians(45));
-        view.setBackClipDistance(50.0);
+        this.view = viewer.getView();
+        this.view.setProjectionPolicy(View.PERSPECTIVE_PROJECTION);        
+        this.view.setFieldOfView(Math.toRadians(45));
+        this.view.setBackClipDistance(50.0);
+        this.view.setFrontClipDistance(0.1); 
 
         // Se construye y devuelve el Universo con los parametros definidos
         return new SimpleUniverse (viewingPlatform, viewer);
     }
-    
+
+    // método que activa la vista en perspectiva creada por defecto    
     public void activarVistaPerspectiva(){
-       // if(view.getCanvas3D(0) == null){
+        // solo si la vista no tiene ningun canvas, podemos agregarle uno
+       if(view.numCanvas3Ds() == 0){
             vistaNave.deshabilitar();
             vistaLuna.deshabilitar();
             view.addCanvas3D(canvas);
-        //} 
+        } 
     }
-    
+
+    // método que activa la vista de la luna
     public void activarVistaLuna(){
-        //view.removeCanvas3D(canvas);
         view.removeAllCanvas3Ds();        
         vistaNave.deshabilitar();
         vistaLuna.habilitar();
     }
     
+    // método que activa la vista de la nave
     public void activarVistaNave(){
-        //view.removeCanvas3D(canvas);
         view.removeAllCanvas3Ds();
         vistaLuna.deshabilitar();
         vistaNave.habilitar();        
     }    
     
     // método para cerrar la aplicación
-    public void closeApp(int code) {
-        System.exit (code);
+    public void closeApp(int code){
+        System.exit(code);
     }
     
 }

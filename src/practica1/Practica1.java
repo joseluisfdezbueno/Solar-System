@@ -25,8 +25,8 @@ public class Practica1 {
         Canvas3D canvasPlanta = new Canvas3D (SimpleUniverse.getPreferredConfiguration());
         Canvas3D canvasVariable = new Canvas3D (SimpleUniverse.getPreferredConfiguration());
         // Se le da el tamaño deseado al lienzo
-        canvasPlanta.setSize(600, 400);
-        canvasVariable.setSize(600, 400);
+        canvasPlanta.setSize(520, 480);
+        canvasVariable.setSize(520, 480);
         // Se crea el universo y la rama de la vista con ese canvas
         Universo universo = new Universo(canvasPlanta, canvasVariable);
         //Universo universo2 = new Universo(canvasVariable);

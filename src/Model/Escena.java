@@ -23,10 +23,8 @@ import javax.vecmath.Vector3d;
  * @author Jose
  */
 
-
 public class Escena extends BranchGroup{
     
-    private BranchGroup escena; // La rama de donde cuelga toda la escena
     private Estrella sol;
     private Planeta planeta;
     private Satelite satelite;
@@ -34,18 +32,16 @@ public class Escena extends BranchGroup{
     
     Escena(Vista vista){        
         this.vistaLuna = vista;
-        // Se crea la rama de la escena
-        escena = crearEscena();
+        // Se crea la escena
+        crearEscena();
     }
 
-    private BranchGroup crearEscena(){
-        // Se crea la rama desde la que cuelga toda la escena
-        escena = new BranchGroup();
+    private void crearEscena(){
                        
         //############## SOL ##############
         // Estrella (nombre, radio, velTraslacion, velRotacion, rutaImagen, distanciaCentro)
         sol = new Estrella("Sol", 4, 0, -8000, "imgs/sol.jpg", new Vector3d (0f, 0f, 0f));
-        this.escena.addChild(sol.getTg());
+        this.addChild(sol.getTg());
         //------------ SOL -----------------        
                               
         //############## MERCURIO //##############        
@@ -97,6 +93,12 @@ public class Escena extends BranchGroup{
         //############## SATURNO //##############
         this.planeta = new Planeta("Saturno", 1.5f, 8000, -7000, "imgs/saturno.jpg", new Vector3d (28.0f, 0.0f, 0.0f));
         sol.añadirPlaneta(planeta);
+        //............ Anillo A ............
+        
+        //............ Anillo B ............
+        
+        //............ Anillo C ............        
+        
         //------------ SATURNO -----------------       
         
         //############## URANO //##############
@@ -121,11 +123,6 @@ public class Escena extends BranchGroup{
         this.planeta.addSatelite(satelite);          
         //------------ NEPTUNO -----------------               
                 
-        return escena;
     }
-    
-    public BranchGroup getBg(){
-        return this.escena;
-    }    
-    
+
 }
