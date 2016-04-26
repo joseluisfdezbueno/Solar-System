@@ -16,7 +16,6 @@ import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.PickInfo;
 import javax.media.j3d.SceneGraphPath;
-import javax.media.j3d.TransformGroup;
 import javax.media.j3d.WakeupCondition;
 import javax.media.j3d.WakeupOnAWTEvent;
 import javax.vecmath.Point3d;
@@ -32,9 +31,9 @@ import javax.vecmath.Point3d;
 public class Pick extends Behavior{
     //private AppStatus status;
     //private WakeupOnAWTEvent [] conditionsToListen = {new WakeupOnAWTEvent (MouseEvent.MOUSE_CLICKED)};
-    private WakeupCondition condicion;
-    private PickCanvas pickCanvas ;
-    private Canvas3D canvas ;
+    private final WakeupCondition condicion;
+    private final PickCanvas pickCanvas ;
+    private final Canvas3D canvas ;
     
     public Pick (Canvas3D canvas, BranchGroup rama){
         this.canvas = canvas;

@@ -5,10 +5,6 @@
  */
 package Model;
 
-import com.sun.j3d.utils.behaviors.vp.OrbitBehavior;
-import com.sun.j3d.utils.universe.Viewer;
-import com.sun.j3d.utils.universe.ViewingPlatform;
-import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.PhysicalBody;
 import javax.media.j3d.PhysicalEnvironment;

@@ -5,7 +5,6 @@
  */
 package Model;
 
-import javax.media.j3d.TransformGroup;
 import javax.vecmath.Color3f;
 import javax.vecmath.Vector3d;
 

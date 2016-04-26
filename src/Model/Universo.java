@@ -37,7 +37,7 @@ public class Universo extends BranchGroup{
     private final Vista vistaPlanta, vistaLuna, vistaNave;
     
     private View view;
-    private Canvas3D canvas;
+    private final Canvas3D canvas;
     
     public Universo(Canvas3D canvasPlanta, Canvas3D canvasVariable){
 

@@ -6,9 +6,6 @@
 package Model;
 
 import java.util.ArrayList;
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Group;
-import javax.media.j3d.TransformGroup;
 import javax.vecmath.Color3f;
 import javax.vecmath.Vector3d;
 
@@ -21,7 +18,7 @@ public class Planeta extends AstroEsferico {
     /*private final TransformGroup rot;
     private final Traslacion tr;
     private final Rotacion rotacion;*/
-    private ArrayList<Satelite> misSatelites;
+    private final ArrayList<Satelite> misSatelites;
     
     public Planeta(String nombre, float radio, int velT, int velR, String rutaImagen, Vector3d vector) {
         super(nombre, radio, velT, velR, rutaImagen, vector);   

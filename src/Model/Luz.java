@@ -7,14 +7,11 @@ package Model;
 
 import javax.media.j3d.AmbientLight;
 import javax.media.j3d.BoundingSphere;
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.DirectionalLight;
 import javax.media.j3d.Light;
 import javax.media.j3d.PointLight;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3f;
-import javax.vecmath.Vector3f;
 
 /**
  *

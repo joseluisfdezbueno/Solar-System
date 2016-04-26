@@ -21,7 +21,7 @@ public class Rotacion extends TransformGroup{
     //private final TransformGroup transform;
     private final Alpha value;
     private boolean estado;
-    private RotationInterpolator rotator;
+    private final RotationInterpolator rotator;
     
     public Rotacion (String eje, int vel){
         // Se crea el grupo que contendrá la transformación de rotación
