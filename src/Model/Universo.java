@@ -9,19 +9,15 @@ import com.sun.j3d.utils.behaviors.vp.OrbitBehavior;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import com.sun.j3d.utils.universe.Viewer;
 import com.sun.j3d.utils.universe.ViewingPlatform;
-import javax.media.j3d.Alpha;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Node;
-import javax.media.j3d.RotPosPathInterpolator;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.View;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
-import javax.vecmath.Point3f;
-import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3d;
 
 /**
@@ -31,14 +27,14 @@ import javax.vecmath.Vector3d;
  */
 public class Universo extends BranchGroup{
     
-    private Escena escena;
-    private Fondo fondo;
-    private BranchGroup root;
-    private SimpleUniverse universe;    
-    private Luz luz;
-    private Nave nave;
-    private Pick pick;
-    private Vista vistaPlanta, vistaLuna, vistaNave;
+    private final Escena escena;
+    private final Fondo fondo;
+    private  BranchGroup root;
+    private final SimpleUniverse universe;    
+    private final Luz luz;
+    private final Nave nave;
+    private final Pick pick;
+    private final Vista vistaPlanta, vistaLuna, vistaNave;
     
     private View view;
     private Canvas3D canvas;

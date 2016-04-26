@@ -6,16 +6,7 @@
 
 package Model;
 
-import com.sun.j3d.utils.geometry.Primitive;
-import javax.media.j3d.Alpha;
-import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Canvas3D;
-import javax.media.j3d.Group;
-import javax.media.j3d.RotationInterpolator;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.TransformGroup;
-import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
 /**
@@ -28,7 +19,7 @@ public class Escena extends BranchGroup{
     private Estrella sol;
     private Planeta planeta;
     private Satelite satelite;
-    private Vista vistaLuna;
+    private final Vista vistaLuna;
     
     Escena(Vista vista){        
         this.vistaLuna = vista;
