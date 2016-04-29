@@ -17,16 +17,16 @@ import javax.vecmath.Vector3d;
  * @author José Luis Fernandez Bueno
  */
 public class AstroEsferico{
-    private final String nombre;
-    private final float radio;
-    private final int velT;
-    private final int velR;
-    private final String rutaImagen;
-    private final Material material;
-    private final Vector3d distanciaReferencia;
-    private final Textura textura;
-    private Vista vista;
-    private final Primitive esfera;
+    String nombre;
+    float radio;
+    int velT;
+    int velR;
+    String rutaImagen;
+    Material material;
+    Vector3d distanciaReferencia;
+    Textura textura;
+    Vista vista;
+    Primitive esfera;
     
     TransformGroup raiz;
     Traslacion traslacion;

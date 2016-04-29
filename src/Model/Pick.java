@@ -29,9 +29,9 @@ import javax.vecmath.Point3d;
 
 
 public class Pick extends Behavior{
-    private final WakeupCondition condicion;
-    private final PickCanvas pickCanvas ;
-    private final Canvas3D canvas ;
+    private WakeupCondition condicion;
+    private PickCanvas pickCanvas ;
+    private Canvas3D canvas ;
     
     public Pick (Canvas3D canvas, BranchGroup rama){
         this.canvas = canvas;
@@ -61,7 +61,7 @@ public class Pick extends Behavior{
                 pickCanvas.setShapeLocation(raton);
                 PickInfo pi = pickCanvas.pickClosest();
                 if(pi != null){
-                   System.out.println(pi.getNode().getParent().getParent());
+                   //System.out.println(pi.getNode().getParent().getParent());
                    rotacion = (Rotacion) pi.getNode().getParent().getParent(); // shape3d -> sphere -> TransformGroup
                    rotacion.pararReanudar();
                 }

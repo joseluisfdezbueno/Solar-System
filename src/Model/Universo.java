@@ -27,12 +27,12 @@ import javax.vecmath.Vector3d;
  */
 public class Universo extends BranchGroup{
     
-    private final Escena escena;
-    private final Fondo fondo;
-    private final Luz luz;
-    private final Nave nave;
-    private final Pick pick;
-    private final Vista vistaPlanta, vistaLuna, vistaNave;
+    private Escena escena;
+    private Fondo fondo;
+    private Luz luz;
+    private Nave nave;
+    private Pick pick;
+    private Vista vistaPlanta, vistaLuna, vistaNave;
     
     private View view;
     private final Canvas3D canvas;
@@ -47,18 +47,18 @@ public class Universo extends BranchGroup{
         // Creamos la vista en planta y la enlazamos al BG universo
         vistaPlanta = new Vista(canvasPlanta);
         //crearVPlanta(posicion, dondeMirar, vup, escala, planoDelantero, planoTrasero)
-        vistaPlanta.crearVPlanta(new Point3d(0,40,0), new Point3d(0,0,0), new Vector3d(0,0,-1), 0.01f, 0.1f, 20f);
+        vistaPlanta.crearVPlanta(new Point3d(0,600,0), new Point3d(0,0,0), new Vector3d(0,0,-1), 0.0022f, 0.3f, 200f);
         this.addChild(vistaPlanta);
         vistaPlanta.habilitar();
         
         // creamos la lista subjetiva posicionada en la luna
         vistaLuna = new Vista(canvasVariable);
         //crearVPlanta(posicion, dondeMirar, vup, angulo, planoDelantero, planoTrasero)
-        vistaLuna.crearVPerspSujetiva(new Point3d(0.7f,0.5f,0f), new Point3d(-2,0,0), new Vector3d(0,1,0), 65f, 0.1f, 35f);
+        vistaLuna.crearVPerspSujetiva(new Point3d(0.1f,0.8f,0f), new Point3d(-2,0,0), new Vector3d(0,1,0), 100f, 0.1f, 35f);
         
         // creamos la lista subjetiva posicionada al frente de la nave
         vistaNave = new Vista(canvasVariable);
-        vistaNave.crearVPerspSujetiva(new Point3d(0,1,-1.5), new Point3d(0,0,1), new Vector3d(0,1,0), 45f, 0.1f, 35f);
+        vistaNave.crearVPerspSujetiva(new Point3d(0,1.5,-1.5), new Point3d(0,0,3), new Vector3d(0,1,0), 60f, 0.1f, 35f);
         // ----------- FIN VISTAS  ------------- //
         
                 

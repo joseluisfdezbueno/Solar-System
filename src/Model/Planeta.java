@@ -15,8 +15,8 @@ import javax.vecmath.Vector3d;
  * @author José Luis Fernandez Bueno
  */
 public class Planeta extends AstroEsferico {
-    private final ArrayList<Satelite> misSatelites;
-    private final ArrayList<AnilloPlanetario> misAnillos;    
+    private ArrayList<Satelite> misSatelites;
+    private ArrayList<AnilloPlanetario> misAnillos;    
     
     public Planeta(String nombre, float radio, int velT, int velR, String rutaImagen, Material material, Vector3d vector) {
         super(nombre, radio, velT, velR, rutaImagen, material, vector);   

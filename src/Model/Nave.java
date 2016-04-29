@@ -28,9 +28,7 @@ import javax.vecmath.Quat4f;
  */
 public class Nave extends BranchGroup{
     private ObjectFile archivo;
-    //private BranchGroup bg;
     private Scene modelo;
-    //private Traslacion tr;
     private Vista vista;
     
     public Nave(){      
@@ -69,14 +67,14 @@ public class Nave extends BranchGroup{
         tg.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
 
         // Orientaciones
-        quats[0] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI));
+        quats[0] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI*1.5));
         quats[1] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI)*1.5f);
         quats[2] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI)*0);
         quats[3] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI)*0);
         quats[4] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI)*0);
-        quats[5] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI)*0);
-        quats[6] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI)/2);
-        quats[7] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI)/2);
+        quats[5] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI*1.5));
+        quats[6] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI*1.5));
+        quats[7] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI*1.5));
         //quats[8] = new Quat4f(0.0f, 1.0f, 0.0f, (float) (Math.PI)*0);
         quats[8] = quats[0];
 

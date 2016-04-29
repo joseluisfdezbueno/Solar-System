@@ -15,7 +15,7 @@ import javax.vecmath.Vector3d;
  * @author José Luis Fernandez Bueno
  */
 public class Traslacion extends TransformGroup{
-    private final Transform3D translation;
+    private Transform3D translation;
     
     public Traslacion(Vector3d vector){
         translation = new Transform3D();

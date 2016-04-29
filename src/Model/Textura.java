@@ -18,9 +18,9 @@ import javax.vecmath.Color3f;
  * @author José Luis Fernandez Bueno
  */
 public class Textura{
-    private final Texture textura;
-    private final Appearance ap;
-    private final TextureAttributes ta;
+    private Texture textura;
+    private Appearance ap;
+    private TextureAttributes ta;
     
     public Textura (String nombre, Material material){
         this.ap = new Appearance();

@@ -21,17 +21,17 @@ import javax.vecmath.Point3d;
  * @author José Luis Fernandez Bueno
  */
 public class Fondo extends BranchGroup{
-    private final Background fondo;
-    private final Appearance app;
-    private final Texture texture;
-    private final Primitive sphere;
+    private Background fondo;
+    private Appearance app;
+    private Texture texture;
+    private Primitive sphere;
     
     public Fondo(){                
         BranchGroup entorno;
         
         // Se carga la textura y se introduce en la aparencia
         this.app = new Appearance ();
-        this.texture = new TextureLoader ("imgs/negroConEstrellas.jpg", null).getTexture();
+        this.texture = new TextureLoader ("imgs/fondo2.jpg", null).getTexture();
         this.app.setTexture (this.texture);
         
         // se crea la geometría donde pegaremos el fondo ya con sus textura

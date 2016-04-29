@@ -19,9 +19,9 @@ import javax.vecmath.Point3d;
  */
 public class Rotacion extends TransformGroup{
     //private final TransformGroup transform;
-    private final Alpha valorAlpha;
+    private Alpha valorAlpha;
     private boolean estado;
-    private final RotationInterpolator rotacion;
+    private RotationInterpolator rotacion;
     
     public Rotacion (String eje, int vel){
         // Se crea el grupo que contendrá la transformación de rotación

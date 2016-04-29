@@ -49,7 +49,7 @@ public class Vista extends TransformGroup{
         // ajustamos parámetros
         view.setProjectionPolicy(View.PARALLEL_PROJECTION);
         view.setScreenScalePolicy (View.SCALE_EXPLICIT);
-        view.setScreenScale(0.01);
+        view.setScreenScale(escala);
         view.setFrontClipDistance(planoDelantero); //0.1
         view.setBackClipDistance(planoTrasero); // 20
         
@@ -77,9 +77,9 @@ public class Vista extends TransformGroup{
         view.setPhysicalEnvironment(new PhysicalEnvironment());
         // la ajustmos
         view.setProjectionPolicy(View.PERSPECTIVE_PROJECTION);
-        view.setFieldOfView(Math.toRadians(anguloApertura)); // 45
-        view.setFrontClipDistance(planoDelantero); // 0.1
-        view.setBackClipDistance(planoTrasero); // 35
+        view.setFieldOfView(Math.toRadians(anguloApertura));
+        view.setFrontClipDistance(planoDelantero);
+        view.setBackClipDistance(planoTrasero);
 
         // enlazamos view con el ViewPlatform        
         view.attachViewPlatform(vpPersp);             
