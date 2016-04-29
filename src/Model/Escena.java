@@ -52,13 +52,13 @@ public class Escena extends BranchGroup{
                        
         //############## SOL ##############
         // Estrella (nombre, radio, velTraslacion, velRotacion, rutaImagen, material, distanciaCentro)
-        this.sol = new Estrella("Sol", 4, 0, -8000, "imgs/Sol.jpg", materialSol, new Vector3d (0f, 0f, 0f));
+        this.sol = new Estrella("Sol", 4, 0, 8000, "imgs/Sol.jpg", materialSol, new Vector3d (0f, 0f, 0f));
         this.addChild(sol.getRaiz());
         //------------ SOL -----------------        
                               
         //############## MERCURIO //##############        
         //  Planeta (nombre, radio, velTraslacion, velRotacion, rutaImagen, material, distanciaEstrella)
-        planeta = new Planeta("Mercurio", 0.6f, 9000, -7000, "imgs/mercurio.jpg", materialPlaneta, new Vector3d (6.0f, 0.0f, 0.0f));
+        planeta = new Planeta("Mercurio", 0.6f, 9000, 7000, "imgs/mercurio.jpg", materialPlaneta, new Vector3d (6.0f, 0.0f, 0.0f));
         sol.añadirPlaneta(planeta);      
         //------------ Mercurio -----------------
         
@@ -68,7 +68,7 @@ public class Escena extends BranchGroup{
         //------------ VENUS -----------------       
 
         //############## TIERRA //##############
-        planeta = new Planeta("Tierra", 1f, 9000, -7000, "imgs/tierra.jpg", materialPlaneta, new Vector3d (14.0f, 0.0f, 0.0f));
+        planeta = new Planeta("Tierra", 1f, 9000, 7000, "imgs/tierra.jpg", materialPlaneta, new Vector3d (14.0f, 0.0f, 0.0f));
         sol.añadirPlaneta(planeta);        
         //............ LUNA ............
         //  Satélite (nombre, radio, velTraslacion, velRotacion, rutaImagen, material, distanciaPlaneta)
@@ -78,7 +78,7 @@ public class Escena extends BranchGroup{
         //------------ TIERRA -----------------       
         
         //############## MARTE //##############
-        planeta = new Planeta("Martes", 0.6f, 8000, -7000, "imgs/marte.jpg", materialPlaneta, new Vector3d (18.0f, 0.0f, 0.0f));
+        planeta = new Planeta("Martes", 0.6f, 8000, 7000, "imgs/marte.jpg", materialPlaneta, new Vector3d (18.0f, 0.0f, 0.0f));
         sol.añadirPlaneta(planeta);        
         //............FOBOS ............
         satelite = new Satelite("Luna", 0.3f, 2000, 1000, "imgs/fobos.jpg", materialSatelite, new Vector3d (1f, 0.0f, 0.0f));
@@ -89,7 +89,7 @@ public class Escena extends BranchGroup{
         //------------ MARTE -----------------
         
         //############## JÚPITER //##############
-        planeta = new Planeta("Júpiter", 2f, 9000, -7000, "imgs/jupiter.jpg", materialPlaneta, new Vector3d (24.0f, 0.0f, 0.0f));
+        planeta = new Planeta("Júpiter", 2f, 9000, 7000, "imgs/jupiter.jpg", materialPlaneta, new Vector3d (24.0f, 0.0f, 0.0f));
         sol.añadirPlaneta(planeta);        
         //............ IO ............
         satelite = new Satelite("Io", 0.3f, 2000, 1000, "imgs/io.jpg", materialSatelite, new Vector3d (2f, 0.0f, 0.0f));
@@ -103,7 +103,7 @@ public class Escena extends BranchGroup{
         //------------ JÚPITER -----------------       
         
         //############## SATURNO //##############
-        planeta = new Planeta("Saturno", 1.5f, 0, -7000, "imgs/saturno.jpg", materialPlaneta, new Vector3d (28.0f, 0.0f, 0.0f));
+        planeta = new Planeta("Saturno", 1.5f, 0, 7000, "imgs/saturno.jpg", materialPlaneta, new Vector3d (28.0f, 0.0f, 0.0f));
         sol.añadirPlaneta(planeta);
         //............ Anillo C ............        
         // AnilloPlanetario(nombre, radioInterior, radioExterior, velR, nombreImagen, material) 
@@ -118,7 +118,7 @@ public class Escena extends BranchGroup{
         //------------ SATURNO -----------------       
         
         //############## URANO //##############
-        planeta = new Planeta("Urano", 1.5f, 9000, -7000, "imgs/urano.jpg", materialPlaneta,new Vector3d (32.0f, 0.0f, 0.0f));
+        planeta = new Planeta("Urano", 1.5f, 9000, 7000, "imgs/urano.jpg", materialPlaneta,new Vector3d (32.0f, 0.0f, 0.0f));
         sol.añadirPlaneta(planeta);        
         //............ TITANIA ............
         satelite = new Satelite("Titania", 0.3f, 500, 1000, "imgs/titania.jpg", materialSatelite, new Vector3d (2f, 0.0f, 0.0f));
@@ -132,7 +132,7 @@ public class Escena extends BranchGroup{
         //------------ URANO -----------------       
         
         //############## NEPTUNO //##############
-        planeta = new Planeta("Neptuno", 1.5f, 5000, -7000, "imgs/neptuno.jpg", materialPlaneta, new Vector3d (36.0f, 0.0f, 0.0f));
+        planeta = new Planeta("Neptuno", 1.5f, 5000, 7000, "imgs/neptuno.jpg", materialPlaneta, new Vector3d (36.0f, 0.0f, 0.0f));
         sol.añadirPlaneta(planeta);        
         //............ TRITÓN ............
         satelite = new Satelite("Tritón", 0.3f, 2000, 1000, "imgs/triton.jpg", materialSatelite, new Vector3d (2f, 0.0f, 0.0f));

@@ -41,9 +41,9 @@ public class Rotacion extends TransformGroup{
         valorAlpha = new Alpha (-1, Alpha.INCREASING_ENABLE, 0, 0, 
                 vel, 0, 0, 0, 0, 0);
         // Se crea el interpolador de rotación, las figuras iran rotando
-        rotacion = new RotationInterpolator (valorAlpha, this, yAxis, 0.0f, (float) Math.PI*(-2.0f));
+        rotacion = new RotationInterpolator (valorAlpha, this, yAxis, 0.0f, (float) Math.PI*2.0f);
         // Se le pone el entorno de activación y se activa
-        rotacion.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0 ), 10000.0));
+        rotacion.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0 ), 100.0));
         rotacion.setEnable(true);
         estado = true;
         // Se cuelga del grupo de transformación y este se devuelve
