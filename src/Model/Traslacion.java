@@ -18,7 +18,7 @@ public class Traslacion extends TransformGroup{
     private final Transform3D translation;
     
     public Traslacion(Vector3d vector){
-        translation = new Transform3D ();
+        translation = new Transform3D();
         translation.setTranslation(vector);
         this.setTransform(translation);
     }

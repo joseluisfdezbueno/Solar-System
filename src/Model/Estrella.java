@@ -7,6 +7,7 @@ package Model;
 
 import java.util.ArrayList;
 import javax.media.j3d.BranchGroup;
+import javax.media.j3d.Material;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3f;
 import javax.vecmath.Vector3d;
@@ -22,13 +23,8 @@ public class Estrella extends AstroEsferico{
     ArrayList<Planeta> misPlanetas;
     Luz miLuz;
     
-    public Estrella(String nombre, float radio, int velT, int velR, String rutaImagen, Vector3d vector){
-        super(nombre, radio, velT, velR, rutaImagen, vector);
-        
-        // seleccionamos el material de la estrella
-        // ambiental, emisiva, difusa, especular, brillo
-        this.textura.modificarMaterial(new Color3f (0.2f, 0.2f, 0.2f), new Color3f (1.0f, 1.0f, 1.0f),
-                new Color3f (0f, 0f, 0f), new Color3f (0f, 0f, 0f), 1.0f);
+    public Estrella(String nombre, float radio, int velT, int velR, String rutaImagen, Material material, Vector3d vector){
+        super(nombre, radio, velT, velR, rutaImagen, material, vector);
         
         // creamos la rama de los planetas que giran alrededor de la estrella
         planetas = new BranchGroup();
@@ -43,6 +39,6 @@ public class Estrella extends AstroEsferico{
     
     void añadirPlaneta (Planeta p){
         misPlanetas.add(p);
-        planetas.addChild(p.getTg());
+        planetas.addChild(p.getRaiz());
     }
 }

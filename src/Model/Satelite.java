@@ -5,6 +5,7 @@
  */
 package Model;
 
+import javax.media.j3d.Material;
 import javax.vecmath.Color3f;
 import javax.vecmath.Vector3d;
 
@@ -15,15 +16,8 @@ import javax.vecmath.Vector3d;
  */
 public class Satelite extends AstroEsferico{
     
-    public Satelite(String nombre, float radio, int velT, int velR, String rutaImagen, Vector3d vector) {
-        super(nombre, radio, velT, velR, rutaImagen, vector);        
-        this.textura.modificarMaterial(new Color3f (0.2f, 0.2f, 0.2f), new Color3f (0.0f, 0.0f, 0.0f),
-            new Color3f (0.5f, 0.5f, 0.5f), new Color3f (0.7f, 0.7f, 0.7f), 128.0f);
+    public Satelite(String nombre, float radio, int velT, int velR, String rutaImagen, Material material, Vector3d vector) {
+        super(nombre, radio, velT, velR, rutaImagen, material, vector);        
     }
-    
-    /*
-    public TransformGroup getTr(){
-        return rot;
-    }
-    */
+
 }

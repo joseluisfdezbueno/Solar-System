@@ -19,9 +19,9 @@ import javax.vecmath.Point3d;
  */
 public class Rotacion extends TransformGroup{
     //private final TransformGroup transform;
-    private final Alpha value;
+    private final Alpha valorAlpha;
     private boolean estado;
-    private final RotationInterpolator rotator;
+    private final RotationInterpolator rotacion;
     
     public Rotacion (String eje, int vel){
         // Se crea el grupo que contendrá la transformación de rotación
@@ -38,29 +38,25 @@ public class Rotacion extends TransformGroup{
         }else
              yAxis.rotZ(Math.PI/2);
         // Se crea un interpolador, un valor numérico que se ira modificando en tiempo de ejecución
-        value = new Alpha (-1, Alpha.INCREASING_ENABLE, 0, 0, 
+        valorAlpha = new Alpha (-1, Alpha.INCREASING_ENABLE, 0, 0, 
                 vel, 0, 0, 0, 0, 0);
         // Se crea el interpolador de rotación, las figuras iran rotando
-        rotator = new RotationInterpolator (value, this, yAxis, 0.0f, (float) Math.PI*(-2.0f));
+        rotacion = new RotationInterpolator (valorAlpha, this, yAxis, 0.0f, (float) Math.PI*(-2.0f));
         // Se le pone el entorno de activación y se activa
-        rotator.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0 ), 10000.0));
-        rotator.setEnable(true);
+        rotacion.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0 ), 10000.0));
+        rotacion.setEnable(true);
         estado = true;
         // Se cuelga del grupo de transformación y este se devuelve
-        this.addChild(rotator);
+        this.addChild(rotacion);
     }
 
-    public TransformGroup getTransform() {
-        return this;
-    }
-    
-    // paramos/reanudamos la rotacion
+    // paramos/reanudamos la rotación
     public void pararReanudar(){
         if (estado){
-            rotator.setEnable(false);
+            rotacion.setEnable(false);
             estado = false;
         }else{
-            rotator.setEnable(true);
+            rotacion.setEnable(true);
             estado = true;
         }            
     }

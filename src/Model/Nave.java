@@ -41,7 +41,7 @@ public class Nave extends BranchGroup{
         
         archivo = new ObjectFile (ObjectFile.RESIZE | ObjectFile.STRIPIFY | ObjectFile.TRIANGULATE );
         try {   
-            modelo = archivo.load ("nave\\naveEspacial\\naveEspacial.obj");
+            modelo = archivo.load ("nave/naveEspacial/naveEspacial.obj");
         }catch (FileNotFoundException | ParsingErrorException | IncorrectFormatException e){
             System.err.println (e);
             System.exit(1);

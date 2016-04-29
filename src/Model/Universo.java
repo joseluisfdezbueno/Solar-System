@@ -29,8 +29,6 @@ public class Universo extends BranchGroup{
     
     private final Escena escena;
     private final Fondo fondo;
-    private  BranchGroup root;
-    private final SimpleUniverse universe;    
     private final Luz luz;
     private final Nave nave;
     private final Pick pick;
@@ -38,22 +36,20 @@ public class Universo extends BranchGroup{
     
     private View view;
     private final Canvas3D canvas;
+    private final SimpleUniverse universe;    
     
     public Universo(Canvas3D canvasPlanta, Canvas3D canvasVariable){
 
         this.canvas = canvasVariable;
                 
-        // ---------- VISTAS --------------
-        // bg donde enlazamos la vista en planta
-        //BranchGroup bgPlanta = new BranchGroup();
+        // ---------- VISTAS -------------- //
         
-        // Creamos la vista en planta, la enlazamos a un BG y la habilitamos
+        // Creamos la vista en planta y la enlazamos al BG universo
         vistaPlanta = new Vista(canvasPlanta);
         //crearVPlanta(posicion, dondeMirar, vup, escala, planoDelantero, planoTrasero)
         vistaPlanta.crearVPlanta(new Point3d(0,40,0), new Point3d(0,0,0), new Vector3d(0,0,-1), 0.01f, 0.1f, 20f);
         this.addChild(vistaPlanta);
         vistaPlanta.habilitar();
-    //    this.universe.addBranchGraph(bgPlanta);
         
         // creamos la lista subjetiva posicionada en la luna
         vistaLuna = new Vista(canvasVariable);
@@ -63,14 +59,11 @@ public class Universo extends BranchGroup{
         // creamos la lista subjetiva posicionada al frente de la nave
         vistaNave = new Vista(canvasVariable);
         vistaNave.crearVPerspSujetiva(new Point3d(0,1,-1.5), new Point3d(0,0,1), new Vector3d(0,1,0), 45f, 0.1f, 35f);
-        // ----------- FIN VISTAS  -------------
+        // ----------- FIN VISTAS  ------------- //
         
-        // creamos la escena
-        escena = new Escena(vistaLuna);
-        
-        // bg de la clase universo
-       // this.root = new BranchGroup();
                 
+        // --- CREAMOS EL RESTO DE RAMAS ----- //        
+        
         // Creamos y enlazamos el fondo
         this.fondo = new Fondo();
         this.addChild(fondo);
@@ -79,33 +72,36 @@ public class Universo extends BranchGroup{
         this.luz = new Luz();
         this.addChild(luz.crearLuzAmbiental(new Color3f (0.2f, 0.2f, 0.2f)));
         
-        // Enlazamos la escena
+        // Creamos y enlazamos la escena        
+        escena = new Escena(vistaLuna);
         this.addChild(this.escena);
 
         
-//############## NAVE //##################################
+        // -------------- NAVE ------------------ //
         nave = new Nave();         
         nave.añadirVista(vistaNave);
         this.addChild(nave.inicializarRuta());
-      //  this.root.addChild(nave.getBg());
-//------------ FIN NAVE -----------------------------------
     
-        // PICK
-                // Activamos la capacidad de ser seleccionado
+        // --------------- PICK ------------------ //
+        
+        // Activamos la capacidad de ser seleccionado los elementos de la rama escena
         this.escena.setCapability(Node.ENABLE_PICK_REPORTING);
         this.escena.setPickable(true);
         pick = new Pick(canvasVariable, escena);
         this.escena.addChild(pick);
                     
+        // ------------- FIN PICK ----------------- //
+        
+        
         // Se crea un SimpleUniverse con la vista en perspectiva por defecto
         this.universe = createUniverse (canvasVariable);
                                        
-        // Se optimiza la escena y se cuelga del universo
+        // Se optimiza nuestro "universo" y se cuelga del simple universe
         this.compile();
         this.universe.addBranchGraph(this);
     }
     
-    // creación del universo
+    // creación del universo, a través de un simple universo, con la vista modificada y con comportamiento para la interacción con el ratón
     private SimpleUniverse createUniverse (Canvas3D canvas) {
         // Se crea manualmente un ViewingPlatform para poder personalizarlo y asignárselo al universo
         ViewingPlatform viewingPlatform = new ViewingPlatform();

@@ -22,16 +22,11 @@ public class Textura{
     private final Appearance ap;
     private final TextureAttributes ta;
     
-    public Textura (String nombre){
+    public Textura (String nombre, Material material){
         this.ap = new Appearance();
         this.textura = new TextureLoader (nombre, null).getTexture();
         this.ap.setTexture (textura);
-        this.ap.setMaterial (new Material (
-            new Color3f (1.0f, 1.0f, 1.0f),   // Color ambiental
-            new Color3f (0f, 0f, 0f),         // Color emisivo
-            new Color3f (1.0f, 1.0f, 1.0f),   // Color difuso
-            new Color3f (0.0f, 0.0f, 0.0f),   // Color especular
-            64.0f ));                         // Brillo
+        this.ap.setMaterial (material);
         this.ta = new TextureAttributes();
         this.ta.setTextureMode(TextureAttributes.MODULATE);
         this.ap.setTextureAttributes(ta);

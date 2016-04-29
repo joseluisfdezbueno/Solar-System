@@ -25,24 +25,24 @@ public class Fondo extends BranchGroup{
     private final Appearance app;
     private final Texture texture;
     private final Primitive sphere;
-    private final BranchGroup entorno;
     
     public Fondo(){                
+        BranchGroup entorno;
         
         // Se carga la textura y se introduce en la aparencia
         this.app = new Appearance ();
-        this.texture = new TextureLoader ("imgs/fondo1.jpg", null).getTexture();
+        this.texture = new TextureLoader ("imgs/negroConEstrellas.jpg", null).getTexture();
         this.app.setTexture (this.texture);
         
         // se crea la geometría donde pegaremos el fondo ya con sus textura
         this.sphere = new Sphere (1.0f, Primitive.GENERATE_TEXTURE_COORDS | Primitive.GENERATE_NORMALS_INWARD, this.app);
 
         // introducimos la esfera en la rama entorno
-        this.entorno = new BranchGroup();
-        this.entorno.addChild (this.sphere);
+        entorno = new BranchGroup();
+        entorno.addChild (this.sphere);
         
         // creamos el fondo pasándole su entorno y generamos su campo de aplicación
-        this.fondo = new Background(this.entorno);
+        this.fondo = new Background(entorno);
         this.fondo.setApplicationBounds (new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 1000000.0));
         
         // introducimos el fondo en el grupo

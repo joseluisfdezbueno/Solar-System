@@ -29,8 +29,6 @@ import javax.vecmath.Point3d;
 
 
 public class Pick extends Behavior{
-    //private AppStatus status;
-    //private WakeupOnAWTEvent [] conditionsToListen = {new WakeupOnAWTEvent (MouseEvent.MOUSE_CLICKED)};
     private final WakeupCondition condicion;
     private final PickCanvas pickCanvas ;
     private final Canvas3D canvas ;
@@ -40,7 +38,6 @@ public class Pick extends Behavior{
         condicion = new WakeupOnAWTEvent(MouseEvent.MOUSE_CLICKED);
         pickCanvas = new PickCanvas(canvas, rama);
         this.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 10000.0));
-        //status = AppStatusNothing;
     }
     
     @Override
@@ -53,14 +50,12 @@ public class Pick extends Behavior{
     @Override
     public void processStimulus(Enumeration cond){
         SceneGraphPath camino = new SceneGraphPath();
-   //     TransformGroup rotacion = new TransformGroup();
         Rotacion rotacion;
         
         WakeupOnAWTEvent c = (WakeupOnAWTEvent) cond.nextElement();
         AWTEvent[] e = c.getAWTEvent();
         MouseEvent raton = (MouseEvent) e[0];
                 
-      //  System.out.println("aaaaaaaaaaaa");
         switch (raton.getID()){
             case MouseEvent.MOUSE_CLICKED:
                 pickCanvas.setShapeLocation(raton);
@@ -70,12 +65,6 @@ public class Pick extends Behavior{
                    rotacion = (Rotacion) pi.getNode().getParent().getParent(); // shape3d -> sphere -> TransformGroup
                    rotacion.pararReanudar();
                 }
-         //       camino = pi.getSceneGraphPath();
-     //          rotacion = (TransformGroup) camino.getNode(camino.nodeCount()-1);
-     //           rotacion.pararReanudar();
-        //        System.out.println("bbbbbbbbbb");
-        //        if(camino != null)
-        //            System.out.println(camino.nodeCount());    
                 break;
             default:
                 System.out.println("Fallo al hacer pick");                         

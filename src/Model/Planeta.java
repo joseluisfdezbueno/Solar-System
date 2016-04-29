@@ -6,6 +6,7 @@
 package Model;
 
 import java.util.ArrayList;
+import javax.media.j3d.Material;
 import javax.vecmath.Color3f;
 import javax.vecmath.Vector3d;
 
@@ -15,33 +16,24 @@ import javax.vecmath.Vector3d;
  * @author José Luis Fernandez Bueno
  */
 public class Planeta extends AstroEsferico {
-    /*private final TransformGroup rot;
-    private final Traslacion tr;
-    private final Rotacion rotacion;*/
-    private final ArrayList<Satelite> misSatelites;
+    private ArrayList<Satelite> misSatelites;
+    private ArrayList<AnilloPlanetario> misAnillos;    
     
-    public Planeta(String nombre, float radio, int velT, int velR, String rutaImagen, Vector3d vector) {
-        super(nombre, radio, velT, velR, rutaImagen, vector);   
-/*
-        rotacion = new Rotacion("y",velR);
-        tr = new Traslacion(vector);
-        rot = rotacion.getTransform();
-        rot.addChild(this.getBg());
-        tr.addChild(rot);
-*/
-        // ambiental, emisiva, difusa, especular
-        this.textura.modificarMaterial(new Color3f (0.2f, 0.2f, 0.2f), new Color3f (0.0f, 0.0f, 0.0f),
-                new Color3f (0.5f, 0.5f, 0.5f), new Color3f (0.7f, 0.7f, 0.7f), 128.0f);
-                
+    public Planeta(String nombre, float radio, int velT, int velR, String rutaImagen, Material material, Vector3d vector) {
+        super(nombre, radio, velT, velR, rutaImagen, material, vector);   
+    
         misSatelites = new ArrayList<>();
+        misAnillos = new ArrayList<>();        
     }
     
-    public void addSatelite (Satelite s){
+    public void añadirSatelite (Satelite s){
         misSatelites.add(s);
-        tr.addChild(s.getTg());
+        traslacion.addChild(s.getRaiz());
     }
+    
+    public void añadirAnillo (AnilloPlanetario anillo){
+        misAnillos.add(anillo);
+        traslacion.addChild(anillo.getRotacion());
+    }    
    
-    /*public Traslacion getTr(){
-        return tr;
-    }*/
 }

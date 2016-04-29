@@ -9,6 +9,7 @@ import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.geometry.Sphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Group;
+import javax.media.j3d.Material;
 import javax.media.j3d.Node;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Vector3d;
@@ -19,59 +20,66 @@ import javax.vecmath.Vector3d;
  * @author José Luis Fernandez Bueno
  */
 public class AstroEsferico{
-    //private final BranchGroup bg;
-    private final Primitive sphere;
-    Textura textura;
+    private String nombre;
+    private float radio;
+    private int velT;
+    private int velR;
+    private String rutaImagen;
+    private Material material;
+    private Vector3d distanciaReferencia;
+    private Textura textura;
+    private Vista vista;
     
-    TransformGroup rot, rot2, raiz;
-    Traslacion tr;
+    TransformGroup raiz;
+    Traslacion traslacion;
     Rotacion rotacionPropia, rotacionEstrella;
-    Vista vista;
+    private final Primitive esfera;    
 
-    public AstroEsferico(String nombre, float radio, int velT, int velR, String nombreImagen, Vector3d vector) {
-        //this.bg = new BranchGroup();
-    //    this.bg.setCapability(BranchGroup.ALLOW_DETACH);
-        this.textura = new Textura(nombreImagen);
-        this.sphere = new Sphere(radio, Primitive.GENERATE_NORMALS |  Primitive.GENERATE_TEXTURE_COORDS |
+    public AstroEsferico(String nombre, float radio, int velT, int velR, String rutaImagen, Material material, Vector3d distancia) {
+        this.nombre = nombre;
+        this.radio = radio;
+        this.velT = velT;
+        this.velR = velR;
+        this.rutaImagen = rutaImagen;
+        this.material = material;
+        this.distanciaReferencia = distancia;
+                
+        // Creamos la esfera (y su textura) que representará un astro
+        this.textura = new Textura(rutaImagen, material);
+        this.esfera = new Sphere(radio, Primitive.GENERATE_NORMALS |  Primitive.GENERATE_TEXTURE_COORDS |
                                     Primitive.ENABLE_APPEARANCE_MODIFY, 64, textura.getAppearance());
-        //this.bg.addChild(sphere);
         
         // rotación sobre si mismo
         rotacionPropia = new Rotacion("y",velR);
-        rot = rotacionPropia.getTransform();
         
-        // vector de distancia al centro de coordenadas
-        tr = new Traslacion(vector);
+        // traslacion
+        traslacion = new Traslacion(distancia);
 
-        if(velT != 0){
+        if(velT != 0){ // Para los astros que giran alrecedor de otros astros
             // rotación sobre el sol
             rotacionEstrella = new Rotacion("y",velT);
-            rot2 = rotacionEstrella.getTransform();
-        
-            // rot.addChild(this.getBg());
-            rot.addChild(sphere);
-            tr.addChild(rot);
-            rot2.addChild(tr);
-            raiz = rot2;
-        }else{
-            rot.addChild(sphere);
-            tr.addChild(rot);
-            raiz = tr;            
+            
+            rotacionPropia.addChild(esfera);
+            traslacion.addChild(rotacionPropia);
+            rotacionEstrella.addChild(traslacion);
+            raiz = rotacionEstrella;
+        }else{        // Para las estrellas o astros que no giran alrededor de ningún otro astro
+            rotacionPropia.addChild(esfera);
+            traslacion.addChild(rotacionPropia);
+            raiz = traslacion;
         }
 
     }
-
-   /* public BranchGroup getBg() {
-        return this.bg;
-    }*/
     
-    public TransformGroup getTg(){
+    // devolvemos el nodo raiz que contiene al astro y sus transformaciones
+    public TransformGroup getRaiz(){
         return raiz;
     }
     
+    // añadimos una vista al astro
     public void añadirVista(Vista vista){
         this.vista = vista;
-        tr.addChild(vista);
+        traslacion.addChild(vista);
     }
                    
 }
