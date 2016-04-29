@@ -6,7 +6,6 @@
 package Model;
 
 import javax.media.j3d.Material;
-import javax.vecmath.Color3f;
 import javax.vecmath.Vector3d;
 
 /**

@@ -19,9 +19,9 @@ import javax.vecmath.Vector3d;
  * @author José Luis Fernandez Bueno
  */
 public class Estrella extends AstroEsferico{
-    BranchGroup planetas;
-    ArrayList<Planeta> misPlanetas;
-    Luz miLuz;
+    private final BranchGroup planetas;
+    private final ArrayList<Planeta> misPlanetas;
+    private final Luz miLuz;
     
     public Estrella(String nombre, float radio, int velT, int velR, String rutaImagen, Material material, Vector3d vector){
         super(nombre, radio, velT, velR, rutaImagen, material, vector);

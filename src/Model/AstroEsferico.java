@@ -7,10 +7,7 @@ package Model;
 
 import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.geometry.Sphere;
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Group;
 import javax.media.j3d.Material;
-import javax.media.j3d.Node;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Vector3d;
 
@@ -20,20 +17,21 @@ import javax.vecmath.Vector3d;
  * @author José Luis Fernandez Bueno
  */
 public class AstroEsferico{
-    private String nombre;
-    private float radio;
-    private int velT;
-    private int velR;
-    private String rutaImagen;
-    private Material material;
-    private Vector3d distanciaReferencia;
-    private Textura textura;
+    private final String nombre;
+    private final float radio;
+    private final int velT;
+    private final int velR;
+    private final String rutaImagen;
+    private final Material material;
+    private final Vector3d distanciaReferencia;
+    private final Textura textura;
     private Vista vista;
+    private final Primitive esfera;
     
     TransformGroup raiz;
     Traslacion traslacion;
     Rotacion rotacionPropia, rotacionEstrella;
-    private final Primitive esfera;    
+    
 
     public AstroEsferico(String nombre, float radio, int velT, int velR, String rutaImagen, Material material, Vector3d distancia) {
         this.nombre = nombre;

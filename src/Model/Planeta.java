@@ -7,7 +7,6 @@ package Model;
 
 import java.util.ArrayList;
 import javax.media.j3d.Material;
-import javax.vecmath.Color3f;
 import javax.vecmath.Vector3d;
 
 /**
@@ -16,8 +15,8 @@ import javax.vecmath.Vector3d;
  * @author José Luis Fernandez Bueno
  */
 public class Planeta extends AstroEsferico {
-    private ArrayList<Satelite> misSatelites;
-    private ArrayList<AnilloPlanetario> misAnillos;    
+    private final ArrayList<Satelite> misSatelites;
+    private final ArrayList<AnilloPlanetario> misAnillos;    
     
     public Planeta(String nombre, float radio, int velT, int velR, String rutaImagen, Material material, Vector3d vector) {
         super(nombre, radio, velT, velR, rutaImagen, material, vector);   
